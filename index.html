@@ -638,6 +638,18 @@
   .pcard-photo.has-photo { background: #2b1016; }
   .pcard-title h4 { margin: 0; font-size: 1.2rem; color: var(--maroon-dark); }
   .pcard-title div { color: var(--muted); font-size: .88rem; font-weight: 600; }
+  .connect-box {
+    margin-top: 16px; padding: 16px; border-radius: 16px;
+    background: linear-gradient(135deg, #fde4ee, var(--gold-light)); border: 1px solid #f0c9d6;
+  }
+  .connect-box h4 { margin: 0 0 4px; font-size: 1.15rem; }
+  .connect-box > p { margin: 0 0 4px; color: var(--muted); font-size: .92rem; }
+  .connect-box .share-row { margin-top: 10px; }
+  .contact-form { margin-top: 14px; padding-top: 14px; border-top: 1px dashed #e3b9c8; }
+  .contact-sides { display: grid; gap: 12px; margin: 8px 0; }
+  .contact-sides > div { background: var(--cream); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+  .contact-sides p { margin: 6px 0 0; }
+  @media (min-width: 640px) { .contact-sides { grid-template-columns: 1fr 1fr; } }
   .share-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
   .share-row .btn { flex: 1 1 180px; }
   .btn-whatsapp { background: linear-gradient(180deg, #2fd16b, #1da851); color: #fff; text-decoration: none; }
@@ -1102,6 +1114,7 @@
           <button role="tab" data-tab="Pending">Pending <span class="count" data-count="Pending">0</span></button>
           <button role="tab" data-tab="Approved">Approved <span class="count" data-count="Approved">0</span></button>
           <button role="tab" data-tab="Rejected">Rejected <span class="count" data-count="Rejected">0</span></button>
+          <button role="tab" data-tab="Contacts">💌 Contact Requests <span class="count" data-count="Contacts">0</span></button>
           <button role="tab" data-tab="Removal">Removal Requests <span class="count" data-count="Removal">0</span></button>
         </div>
         <form id="admin-search" class="inline-form">
@@ -1169,7 +1182,7 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
-  <script>window.API_URL = "https://script.google.com/macros/s/AKfycbzo7bq5ug_5Pg6rLAqjuREA01VkCHjJV5R67lzIRJOOliUAfhKmEbW1gjLtzR6baG-d/exec";window.APP_CONFIG_DEFAULT = {"ready":true,"memberAccessRequired":false,"contactInfo":"","states":["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Andaman and Nicobar Islands","Chandigarh","Dadra and Nagar Haveli and Daman and Diu","Delhi","Jammu and Kashmir","Ladakh","Lakshadweep","Puducherry","Outside India"],"maritalStatuses":["Never Married","Divorced","Widowed","Awaiting Divorce"],"minAge":{"Male":21,"Female":18},"maxAge":70};</script>
+  <script>window.API_URL = "https://script.google.com/macros/s/AKfycbzo7bq5ug_5Pg6rLAqjuREA01VkCHjJV5R67lzIRJOOliUAfhKmEbW1gjLtzR6baG-d/exec";window.APP_CONFIG_DEFAULT = {"ready":true,"memberAccessRequired":false,"contactInfo":"","committeePhone":"","states":["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Andaman and Nicobar Islands","Chandigarh","Dadra and Nagar Haveli and Daman and Diu","Delhi","Jammu and Kashmir","Ladakh","Lakshadweep","Puducherry","Outside India"],"maritalStatuses":["Never Married","Divorced","Widowed","Awaiting Divorce"],"minAge":{"Male":21,"Female":18},"maxAge":70};</script>
   <script>
 /* Interface text in English, Marathi and Hindi. Missing keys fall back to English.
    {n}, {id}, {p} … are placeholders filled in by the page. */
@@ -1315,7 +1328,24 @@ window.I18N = {
     'd.years': '{n} years',
     'd.willing': 'Willing to marry in Ganli Samaj',
     'd.social': 'Social profiles',
-    'd.copy': '📋 Copy biodata',
+    'd.sharePhoto': '📤 Share with photo',
+    'd.preparing': 'Preparing…',
+    'd.cardSaved': 'Biodata card with photo downloaded — attach it in WhatsApp.',
+    'cr.title': 'Interested in this profile?',
+    'cr.text': 'Send your details. The committee will check and connect both families by phone. Phone numbers are never shown publicly.',
+    'cr.send': '💌 Send interest / Request contact',
+    'cr.call': '📞 Call committee',
+    'cr.waCommittee': '💬 WhatsApp committee',
+    'cr.waText': 'Namaste, I am interested in profile {id} on the Ganli Samaj matrimonial website. Please share more details.',
+    'cr.name': 'Your name',
+    'cr.mobile': 'Your mobile number',
+    'cr.myId': 'Your Profile ID (if registered)',
+    'cr.message': 'Message',
+    'cr.msgPh': 'e.g. We liked this profile. Please share family details.',
+    'cr.submit': 'Send request',
+    'cr.done': 'Request sent! The committee will contact you on {mobile} soon.',
+    'cr.already': 'You have already sent a request for this profile. The committee will contact you soon.',
+    'd.copy': '📋 Copy text',
     'd.copied': 'Biodata copied',
     'd.whatsapp': 'Share on WhatsApp',
     'd.contactLine': 'Contact: Ganli Samaj matrimonial committee (quote Profile ID {id})',
@@ -1499,7 +1529,24 @@ window.I18N = {
     'd.years': '{n} वर्षे',
     'd.willing': 'गानली समाजात विवाहास इच्छुक',
     'd.social': 'सोशल प्रोफाइल',
-    'd.copy': '📋 बायोडाटा कॉपी करा',
+    'd.sharePhoto': '📤 फोटोसह पाठवा',
+    'd.preparing': 'तयार करत आहोत…',
+    'd.cardSaved': 'फोटोसह बायोडाटा कार्ड डाउनलोड झाले — ते WhatsApp मध्ये जोडा.',
+    'cr.title': 'हे स्थळ आवडले?',
+    'cr.text': 'आपली माहिती पाठवा. समिती तपासून दोन्ही कुटुंबांना फोनद्वारे जोडून देईल. मोबाईल नंबर कधीही सार्वजनिक दाखवले जात नाहीत.',
+    'cr.send': '💌 पसंती कळवा / संपर्क मागवा',
+    'cr.call': '📞 समितीला फोन करा',
+    'cr.waCommittee': '💬 समितीला WhatsApp करा',
+    'cr.waText': 'नमस्कार, गानली समाज विवाह परिचय केंद्रावरील प्रोफाइल {id} मध्ये मला रस आहे. कृपया अधिक माहिती द्या.',
+    'cr.name': 'आपले नाव',
+    'cr.mobile': 'आपला मोबाईल नंबर',
+    'cr.myId': 'आपला प्रोफाइल आयडी (नोंदणी केली असल्यास)',
+    'cr.message': 'संदेश',
+    'cr.msgPh': 'उदा. आम्हाला हे स्थळ आवडले. कृपया कौटुंबिक माहिती द्या.',
+    'cr.submit': 'विनंती पाठवा',
+    'cr.done': 'विनंती पाठवली! समिती लवकरच {mobile} वर आपल्याशी संपर्क साधेल.',
+    'cr.already': 'या प्रोफाइलसाठी आपण आधीच विनंती पाठवली आहे. समिती लवकरच संपर्क साधेल.',
+    'd.copy': '📋 माहिती कॉपी करा',
     'd.copied': 'बायोडाटा कॉपी झाला',
     'd.whatsapp': 'WhatsApp वर पाठवा',
     'd.contactLine': 'संपर्क: गानली समाज विवाह समिती (प्रोफाइल आयडी {id} सांगा)',
@@ -1683,7 +1730,24 @@ window.I18N = {
     'd.years': '{n} वर्ष',
     'd.willing': 'गानली समाज में विवाह के इच्छुक',
     'd.social': 'सोशल प्रोफ़ाइल',
-    'd.copy': '📋 बायोडाटा कॉपी करें',
+    'd.sharePhoto': '📤 फोटो के साथ भेजें',
+    'd.preparing': 'तैयार हो रहा है…',
+    'd.cardSaved': 'फोटो के साथ बायोडाटा कार्ड डाउनलोड हुआ — इसे WhatsApp में जोड़ें।',
+    'cr.title': 'यह प्रोफ़ाइल पसंद आई?',
+    'cr.text': 'अपनी जानकारी भेजें। समिति जाँच कर दोनों परिवारों को फ़ोन से जोड़ेगी। मोबाइल नंबर कभी सार्वजनिक नहीं होते।',
+    'cr.send': '💌 रुचि भेजें / संपर्क माँगें',
+    'cr.call': '📞 समिति को कॉल करें',
+    'cr.waCommittee': '💬 समिति को WhatsApp करें',
+    'cr.waText': 'नमस्ते, गानली समाज विवाह परिचय केंद्र की प्रोफ़ाइल {id} में मेरी रुचि है। कृपया अधिक जानकारी दें।',
+    'cr.name': 'आपका नाम',
+    'cr.mobile': 'आपका मोबाइल नंबर',
+    'cr.myId': 'आपकी प्रोफ़ाइल आईडी (यदि पंजीकृत हैं)',
+    'cr.message': 'संदेश',
+    'cr.msgPh': 'जैसे हमें यह प्रोफ़ाइल पसंद है। कृपया पारिवारिक जानकारी दें।',
+    'cr.submit': 'अनुरोध भेजें',
+    'cr.done': 'अनुरोध भेज दिया! समिति जल्द ही {mobile} पर आपसे संपर्क करेगी।',
+    'cr.already': 'इस प्रोफ़ाइल के लिए आप पहले ही अनुरोध भेज चुके हैं। समिति जल्द संपर्क करेगी।',
+    'd.copy': '📋 जानकारी कॉपी करें',
     'd.copied': 'बायोडाटा कॉपी हो गया',
     'd.whatsapp': 'WhatsApp पर भेजें',
     'd.contactLine': 'संपर्क: गानली समाज विवाह समिति (प्रोफ़ाइल आईडी {id} बताएँ)',
@@ -2534,10 +2598,196 @@ window.I18N = {
     });
   }
 
+  /* ---------- Connecting families (phone numbers stay private) ---------- */
+
+  function connectHtml(p) {
+    var phone = CFG.committeePhone;
+    var waMsg = encodeURIComponent(t('cr.waText', { id: p.id }));
+    return '<div class="connect-box">' +
+      '<h4>' + esc(t('cr.title')) + '</h4>' +
+      '<p>' + esc(t('cr.text')) + '</p>' +
+      '<div class="share-row">' +
+        '<button type="button" class="btn btn-primary" data-open-contact>' + esc(t('cr.send')) + '</button>' +
+        (phone ? '<a class="btn btn-ghost" href="tel:+91' + esc(phone) + '">' + esc(t('cr.call')) + '</a>' +
+          '<a class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer" href="https://wa.me/91' + esc(phone) +
+          '?text=' + waMsg + '">' + esc(t('cr.waCommittee')) + '</a>' : '') +
+      '</div>' +
+      (CFG.contactInfo ? '<p class="small"><strong>' + esc(CFG.contactInfo) + '</strong></p>' : '') +
+      '<form class="contact-form" data-contact-form hidden novalidate>' +
+        '<div class="grid-2">' +
+          '<label class="field"><span class="lbl">' + esc(t('cr.name')) + '</span> <span class="req">*</span>' +
+            '<input name="fromName" maxlength="80" autocomplete="name"></label>' +
+          '<label class="field"><span class="lbl">' + esc(t('cr.mobile')) + '</span> <span class="req">*</span>' +
+            '<input name="mobile" type="tel" inputmode="numeric" maxlength="16" autocomplete="tel"></label>' +
+          '<label class="field span-2"><span class="lbl">' + esc(t('cr.myId')) + '</span>' +
+            '<input name="fromProfileId" maxlength="12" placeholder="GS-00012" autocapitalize="characters"></label>' +
+          '<label class="field span-2"><span class="lbl">' + esc(t('cr.message')) + '</span>' +
+            '<textarea name="message" rows="3" maxlength="500" placeholder="' + esc(t('cr.msgPh')) + '"></textarea></label>' +
+        '</div>' +
+        '<div class="hp" aria-hidden="true"><input name="website" tabindex="-1" autocomplete="off"></div>' +
+        '<div class="alert" data-contact-msg hidden></div>' +
+        '<div class="form-actions"><button type="submit" class="btn btn-primary">' + esc(t('cr.submit')) + '</button></div>' +
+      '</form>' +
+    '</div>';
+  }
+
+  $('#profile-modal-body').addEventListener('submit', function (e) {
+    var f = e.target.closest('[data-contact-form]');
+    if (!f || !state.currentProfile) return;
+    e.preventDefault();
+    var msg = f.querySelector('[data-contact-msg]');
+    var name = f.fromName.value.trim();
+    var fromId = f.fromProfileId.value.trim().toUpperCase();
+    if (!/^[\p{L}\p{M}][\p{L}\p{M} .'-]{1,79}$/u.test(name)) { showAlert(msg, t('v.name')); return; }
+    if (!normalizeMobile(f.mobile.value)) { showAlert(msg, t('v.mobile')); return; }
+    if (fromId && !/^GS-\d{5,}$/.test(fromId)) { showAlert(msg, t('v.profileId')); return; }
+    var btn = f.querySelector('button[type="submit"]');
+    setBusy(btn, true, t('btn.sending'));
+    call('requestContact', viewerToken(), {
+      profileId: state.currentProfile.id, name: name, mobile: f.mobile.value, fromProfileId: fromId,
+      message: f.message.value, website: f.website.value
+    }).then(function () {
+      showAlert(msg, t('cr.done', { mobile: normalizeMobile(f.mobile.value) }), 'ok');
+      btn.hidden = true;
+    }, function (err) {
+      showAlert(msg, hasCode(err, 'ALREADY_SENT') ? t('cr.already') : errText(err), hasCode(err, 'ALREADY_SENT') ? 'ok' : 'error');
+    }).then(function () { setBusy(btn, false); });
+  });
+
+  /* ---------- Biodata card image (photo + details) for sharing ---------- */
+
+  function loadImage(src) {
+    return new Promise(function (resolve) {
+      if (!src) { resolve(null); return; }
+      var img = new Image();
+      img.onload = function () { resolve(img); };
+      img.onerror = function () { resolve(null); };
+      img.src = src;
+    });
+  }
+
+  /** Draws a 1080×1500 maroon-and-gold card: whole photo (uncropped), name and key details. */
+  function makeBioCard(p) {
+    var fontsReady = (document.fonts && document.fonts.load)
+      ? Promise.all(['700 52px "Noto Serif Devanagari"', '700 40px "Noto Sans"', '600 32px "Noto Sans Devanagari"']
+          .map(function (f) { return document.fonts.load(f); })).catch(function () {})
+      : Promise.resolve();
+    return fontsReady.then(function () { return loadImage(p.photo); }).then(function (img) {
+      var W = 1080, H = 1500, c = document.createElement('canvas');
+      c.width = W; c.height = H;
+      var x = c.getContext('2d');
+      var serif = '"Noto Serif Devanagari", Georgia, serif';
+      var sans = '"Noto Sans", "Noto Sans Devanagari", Arial, sans-serif';
+      var fit = function (text, max) {
+        text = String(text || '');
+        if (x.measureText(text).width <= max) return text;
+        while (text.length > 1 && x.measureText(text + '…').width > max) text = text.slice(0, -1);
+        return text + '…';
+      };
+
+      // Background and header
+      x.fillStyle = '#fdf8ef'; x.fillRect(0, 0, W, H);
+      var g = x.createLinearGradient(0, 0, W, 220);
+      g.addColorStop(0, '#4a0d1c'); g.addColorStop(0.55, '#8b1538'); g.addColorStop(1, '#a3184a');
+      x.fillStyle = g; x.fillRect(0, 0, W, 220);
+      for (var i = 15; i < W; i += 30) { // marigold garland
+        x.fillStyle = '#f5a623'; x.beginPath(); x.arc(i, 14, 9, 0, 7); x.fill();
+        x.fillStyle = '#ffd25e'; x.beginPath(); x.arc(i, 14, 4, 0, 7); x.fill();
+      }
+      x.textAlign = 'center';
+      x.fillStyle = '#f2c75c'; x.font = '700 52px ' + serif;
+      x.fillText(fit('गानली समाज – विवाह परिचय केंद्र', W - 80), W / 2, 112);
+      x.fillStyle = '#f6dc9a'; x.font = '600 30px ' + sans;
+      x.fillText('Ganli (Ganali) Samaj Matrimonial Directory', W / 2, 170);
+
+      // Photo area: blurred fill + whole photo on top
+      var px = 140, py = 250, pw = 800, ph = 760;
+      x.save();
+      x.beginPath(); x.rect(px, py, pw, ph); x.clip();
+      x.fillStyle = p.gender === 'Female' ? '#ad1457' : '#a3184a'; x.fillRect(px, py, pw, ph);
+      if (img) {
+        var cover = Math.max(pw / img.width, ph / img.height);
+        x.filter = 'blur(28px) brightness(0.75)';
+        x.drawImage(img, px + (pw - img.width * cover) / 2, py + (ph - img.height * cover) / 2, img.width * cover, img.height * cover);
+        x.filter = 'none';
+        var contain = Math.min(pw / img.width, ph / img.height);
+        x.drawImage(img, px + (pw - img.width * contain) / 2, py + (ph - img.height * contain) / 2, img.width * contain, img.height * contain);
+      } else {
+        x.fillStyle = 'rgba(255,255,255,.92)'; x.font = '700 220px ' + serif;
+        x.fillText(initials(p.name), W / 2, py + ph / 2 + 80);
+      }
+      x.restore();
+      x.strokeStyle = '#c99a2e'; x.lineWidth = 8; x.strokeRect(px, py, pw, ph);
+
+      // Name and details
+      x.fillStyle = '#561520'; x.font = '700 56px ' + serif;
+      x.fillText(fit(p.name, W - 120), W / 2, 1090);
+      x.fillStyle = '#6d5f63'; x.font = '600 34px ' + sans;
+      x.fillText(fit(t('card.yrs', { n: p.age }) + ' · ' + heightShort(p.heightCm) + ' · ' + p.city + ', ' + p.state, W - 120), W / 2, 1145);
+      x.textAlign = 'left'; x.font = '600 32px ' + sans;
+      [['🎓', p.education], ['💼', p.profession], ['💍', tv(p.maritalStatus) + ' · ' + tv(p.community)]].forEach(function (r, k) {
+        x.fillStyle = '#2b2024';
+        x.fillText(fit(r[0] + '  ' + r[1], W - 280), 140, 1215 + k * 52);
+      });
+
+      // Footer
+      var fg = x.createLinearGradient(0, H - 130, W, H);
+      fg.addColorStop(0, '#561520'); fg.addColorStop(1, '#8b1538');
+      x.fillStyle = fg; x.fillRect(0, H - 130, W, 130);
+      x.textAlign = 'center';
+      x.fillStyle = '#f2c75c'; x.font = '700 34px ' + sans;
+      x.fillText(t('f.profileId') + ': ' + p.id, W / 2, H - 78);
+      x.fillStyle = '#f6dc9a'; x.font = '600 26px ' + sans;
+      x.fillText(fit(IN_GAS ? t('d.contactLine', { id: p.id }) : location.host, W - 80), W / 2, H - 34);
+
+      return new Promise(function (resolve, reject) {
+        c.toBlob(function (b) { if (b) resolve(b); else reject(new Error('card')); }, 'image/jpeg', 0.9);
+      });
+    });
+  }
+
+  function downloadBlob(blob, name) {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+  }
+
+  /** Opens the phone's share menu (WhatsApp, etc.) with the photo card and text; otherwise downloads the card. */
+  function shareCard(p, btn) {
+    setBusy(btn, true, t('d.preparing'));
+    makeBioCard(p).then(function (blob) {
+      var name = p.id + '-biodata.jpg';
+      var file = null;
+      try { file = new File([blob], name, { type: 'image/jpeg' }); } catch (e) { file = null; }
+      var fallback = function () { downloadBlob(blob, name); toast(t('d.cardSaved'), 'ok'); };
+      if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+        return navigator.share({ files: [file], title: p.name, text: biodataText(p) }).catch(function (e) {
+          if (!e || e.name !== 'AbortError') fallback(); // e.g. sharing blocked inside an embedded page
+        });
+      }
+      fallback();
+    }).catch(function () { toast(t('err.generic'), 'error'); })
+      .then(function () { setBusy(btn, false); });
+  }
+
   $('#profile-modal-body').addEventListener('click', function (e) {
+    var p = state.currentProfile;
+    if (!p) return;
+    if (e.target.closest('[data-open-contact]')) {
+      var f = $('[data-contact-form]', $('#profile-modal-body'));
+      f.hidden = false;
+      f.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      f.fromName.focus();
+      return;
+    }
+    var share = e.target.closest('[data-share-card]');
+    if (share) { shareCard(p, share); return; }
     var b = e.target.closest('[data-copy-bio]');
-    if (!b || !state.currentProfile) return;
-    copyText(biodataText(state.currentProfile)).then(function () {
+    if (!b) return;
+    copyText(biodataText(p)).then(function () {
       toast(t('d.copied'), 'ok');
       b.textContent = '✓ ' + t('d.copied');
     }, function () { toast(t('err.generic'), 'error'); });
@@ -2563,9 +2813,9 @@ window.I18N = {
         '<div class="detail-section">' + (p.intro ? '<h4>' + esc(t('leg.about')) + '</h4><p>' + esc(p.intro) + '</p>' : '') +
         '<h4>' + esc(t('leg.family')) + '</h4><p>' + esc(p.familyDetails) + '</p>' +
         (social ? '<h4>' + esc(t('d.social')) + '</h4><div class="social-links">' + social + '</div>' : '') + '</div>' +
-        '<p class="contact-note">' + esc(t('d.contact')).split('{id}').join('<strong>' + esc(p.id) + '</strong>') +
-          (CFG.contactInfo ? '<br><strong>' + esc(CFG.contactInfo) + '</strong>' : '') + '</p>' +
+        connectHtml(p) +
         '<div class="share-row">' +
+          '<button type="button" class="btn btn-primary" data-share-card>' + esc(t('d.sharePhoto')) + '</button>' +
           '<button type="button" class="btn btn-gold" data-copy-bio>' + esc(t('d.copy')) + '</button>' +
           '<a class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer" href="https://wa.me/?text=' +
             encodeURIComponent(biodataText(p)) + '">' + esc(t('d.whatsapp')) + '</a>' +
@@ -2675,9 +2925,20 @@ window.I18N = {
 
   function loadAdmin() {
     $$('.tabs [data-tab]').forEach(function (b) { b.classList.toggle('active', b.dataset.tab === state.adminTab); });
-    $('#admin-search').hidden = state.adminTab === 'Removal';
+    $('#admin-search').hidden = state.adminTab === 'Removal' || state.adminTab === 'Contacts';
     var list = $('#admin-list');
     list.innerHTML = '<div class="loading">Loading…</div>';
+
+    if (state.adminTab === 'Contacts') {
+      Promise.all([
+        call('adminListContactRequests', state.adminToken),
+        call('adminListProfiles', state.adminToken, { status: 'Pending' })
+      ]).then(function (r) {
+        updateCounts(r[1].counts);
+        renderContacts(r[0]);
+      }).catch(function (err) { list.innerHTML = ''; adminFail(err); });
+      return;
+    }
 
     if (state.adminTab === 'Removal') {
       Promise.all([
@@ -2727,6 +2988,51 @@ window.I18N = {
     '</article>';
   }
 
+  /** Call + WhatsApp links for an Indian 10-digit mobile number, with an optional prefilled message. */
+  function phoneLinks(mobile, waText) {
+    if (!mobile) return '';
+    return '<a class="btn btn-ghost btn-sm" href="tel:+91' + esc(mobile) + '">📞 ' + esc(mobile) + '</a>' +
+      '<a class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer" href="https://wa.me/91' + esc(mobile) +
+      '?text=' + encodeURIComponent(waText || '') + '">💬 WhatsApp</a>';
+  }
+
+  function renderContacts(items) {
+    var list = $('#admin-list');
+    if (!items.length) {
+      list.innerHTML = '<div class="empty">No contact requests yet. They appear here when a family taps "Send interest" on a profile.</div>';
+      return;
+    }
+    var badge = { New: 'badge-pending', Connected: 'badge-approved', Declined: 'badge-rejected' };
+    list.innerHTML = items.map(function (r) {
+      var rid = esc(r.requestId);
+      var toFamily = 'Namaste ' + r.guardianName + ', this is the Ganli Samaj matrimonial committee. A family is interested in profile ' +
+        r.profileId + ' (' + r.profileName + '): ' + r.fromName + (r.fromProfileId ? ' (' + r.fromProfileId + ')' : '') +
+        '. Shall we share your contact number with them?';
+      var toRequester = 'Namaste ' + r.fromName + ', this is the Ganli Samaj matrimonial committee about your request for profile ' + r.profileId + '.';
+      return '<article class="admin-item contact-item">' +
+        '<div class="admin-item-head"><div><h4>For ' + esc(r.profileId) + (r.profileName ? ' — ' + esc(r.profileName) : '') + '</h4>' +
+          '<div class="muted small">' + rid + ' · ' + esc(fmtDate(r.requestedAt)) +
+          (r.handledBy ? ' · ' + esc(r.status) + ' by ' + esc(r.handledBy) : '') + '</div></div>' +
+          '<span class="badge ' + (badge[r.status] || '') + '">' + esc(r.status) + '</span></div>' +
+        (r.profileExists ? '' : '<div class="alert alert-warn small">This profile no longer exists.</div>') +
+        '<div class="contact-sides">' +
+          '<div><div class="small muted">Interested family</div><strong>' + esc(r.fromName) + '</strong>' +
+            (r.fromProfileId ? ' <span class="chip">' + esc(r.fromProfileId) + (r.fromProfileName ? ' · ' + esc(r.fromProfileName) : '') + '</span>' : '') +
+            (r.message ? '<p class="small">“' + esc(r.message) + '”</p>' : '') +
+            '<div class="admin-actions">' + phoneLinks(r.fromMobile, toRequester) + '</div></div>' +
+          (r.profileExists ? '<div><div class="small muted">Profile family (guardian)</div><strong>' + esc(r.guardianName) + '</strong>' +
+            '<div class="admin-actions">' + phoneLinks(r.guardianMobile, toFamily) + '</div></div>' : '') +
+        '</div>' +
+        (r.adminNote ? '<div class="small"><strong>Note:</strong> ' + esc(r.adminNote) + '</div>' : '') +
+        '<div class="admin-actions">' +
+          (r.profileExists ? '<button class="btn btn-ghost btn-sm" data-act="view" data-id="' + esc(r.profileId) + '">View profile</button>' : '') +
+          (r.status !== 'Connected' ? '<button class="btn btn-success btn-sm" data-act="cr-Connected" data-rid="' + rid + '">✓ Mark connected</button>' : '') +
+          (r.status !== 'Declined' ? '<button class="btn btn-ghost btn-sm" data-act="cr-Declined" data-rid="' + rid + '">Decline</button>' : '') +
+          (r.status !== 'New' ? '<button class="btn btn-ghost btn-sm" data-act="cr-New" data-rid="' + rid + '">Reopen</button>' : '') +
+        '</div></article>';
+    }).join('');
+  }
+
   function renderRemovals(items) {
     var list = $('#admin-list');
     if (!items.length) { list.innerHTML = '<div class="empty">No open removal requests.</div>'; return; }
@@ -2771,6 +3077,13 @@ window.I18N = {
     } else if (act === 'rr-delete') {
       job = confirmBox({ title: 'Delete this profile permanently?', message: 'The profile, photo and PDF will be removed and the request closed.', okText: 'Delete', danger: true })
         .then(function (r) { return r && call('adminResolveRemoval', token, b.dataset.rid, 'delete'); });
+    } else if (/^cr-(New|Connected|Declined)$/.test(act)) {
+      var status = act.slice(3);
+      job = status === 'New'
+        ? call('adminUpdateContactRequest', token, b.dataset.rid, 'New', '')
+        : confirmBox({ title: status === 'Connected' ? 'Mark as connected?' : 'Decline this request?',
+            input: 'Note (optional, admins only)', okText: status === 'Connected' ? 'Mark connected' : 'Decline' })
+          .then(function (r) { return r && call('adminUpdateContactRequest', token, b.dataset.rid, status, r.text); });
     } else if (act === 'rr-dismiss') {
       job = confirmBox({ title: 'Dismiss this request?', message: 'The profile stays and is shown in the directory again (if approved).', okText: 'Dismiss' })
         .then(function (r) { return r && call('adminResolveRemoval', token, b.dataset.rid, 'dismiss'); });
