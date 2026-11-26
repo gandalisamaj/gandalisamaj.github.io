@@ -1007,6 +1007,24 @@
         </fieldset>
 
         <fieldset class="card">
+          <legend><span data-i18n="leg.birth">Birth &amp; horoscope details</span> <span class="optional" data-i18n="optional">(optional)</span></legend>
+          <div class="grid-2">
+            <label class="field"><span class="lbl" data-i18n="f.birthTime">Birth time</span>
+              <input type="time" name="birthTime">
+            </label>
+            <label class="field"><span class="lbl" data-i18n="f.birthPlace">Birth place</span>
+              <input name="birthPlace" maxlength="60" placeholder="e.g. Chandrapur" data-i18n-ph="ph.birthPlace">
+            </label>
+            <label class="field"><span class="lbl" data-i18n="f.rashi">Rashi</span>
+              <select name="rashi" data-fill="rashis"></select>
+            </label>
+            <label class="field"><span class="lbl" data-i18n="f.bloodGroup">Blood group</span>
+              <select name="bloodGroup" data-fill="bloodGroups"></select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="card">
           <legend><span data-i18n="leg.about">About</span> <span class="optional" data-i18n="optional">(optional)</span></legend>
           <label class="field"><span class="lbl" data-i18n="f.intro">Short Introduction</span>
             <textarea name="intro" maxlength="1000" rows="4" placeholder="A few lines about yourself, your interests and expectations." data-i18n-ph="ph.intro" data-counter></textarea>
@@ -1226,7 +1244,7 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
-  <script>window.API_URL = "https://script.google.com/macros/s/AKfycbzo7bq5ug_5Pg6rLAqjuREA01VkCHjJV5R67lzIRJOOliUAfhKmEbW1gjLtzR6baG-d/exec";window.APP_CONFIG_DEFAULT = {"ready":true,"memberAccessRequired":false,"contactInfo":"","committeePhone":"7820860671","states":["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Andaman and Nicobar Islands","Chandigarh","Dadra and Nagar Haveli and Daman and Diu","Delhi","Jammu and Kashmir","Ladakh","Lakshadweep","Puducherry","Outside India"],"maritalStatuses":["Never Married","Divorced","Widowed","Awaiting Divorce"],"minAge":{"Male":21,"Female":18},"maxAge":70};</script>
+  <script>window.API_URL = "https://script.google.com/macros/s/AKfycbzo7bq5ug_5Pg6rLAqjuREA01VkCHjJV5R67lzIRJOOliUAfhKmEbW1gjLtzR6baG-d/exec";window.APP_CONFIG_DEFAULT = {"ready":true,"memberAccessRequired":false,"contactInfo":"","committeePhone":"7820860671","states":["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Andaman and Nicobar Islands","Chandigarh","Dadra and Nagar Haveli and Daman and Diu","Delhi","Jammu and Kashmir","Ladakh","Lakshadweep","Puducherry","Outside India"],"maritalStatuses":["Never Married","Divorced","Widowed","Awaiting Divorce"],"rashis":["Mesh","Vrishabh","Mithun","Kark","Simha","Kanya","Tula","Vrishchik","Dhanu","Makar","Kumbh","Meen"],"bloodGroups":["A+","A-","B+","B-","AB+","AB-","O+","O-"],"minAge":{"Male":21,"Female":18},"maxAge":70};</script>
   <script>
 /* Interface text in English, Marathi and Hindi. Missing keys fall back to English.
    {n}, {id}, {p} … are placeholders filled in by the page. */
@@ -1372,6 +1390,26 @@ window.I18N = {
     'd.years': '{n} years',
     'd.willing': 'Willing to marry in Ganli Samaj',
     'd.social': 'Social profiles',
+    'leg.birth': 'Birth & horoscope details',
+    'f.birthTime': 'Birth time',
+    'f.birthPlace': 'Birth place',
+    'ph.birthPlace': 'e.g. Chandrapur',
+    'f.rashi': 'Rashi',
+    'f.bloodGroup': 'Blood group',
+    'u.am': 'AM',
+    'u.pm': 'PM',
+    'val.Mesh': 'Mesh (Aries)',
+    'val.Vrishabh': 'Vrishabh (Taurus)',
+    'val.Mithun': 'Mithun (Gemini)',
+    'val.Kark': 'Kark (Cancer)',
+    'val.Simha': 'Simha (Leo)',
+    'val.Kanya': 'Kanya (Virgo)',
+    'val.Tula': 'Tula (Libra)',
+    'val.Vrishchik': 'Vrishchik (Scorpio)',
+    'val.Dhanu': 'Dhanu (Sagittarius)',
+    'val.Makar': 'Makar (Capricorn)',
+    'val.Kumbh': 'Kumbh (Aquarius)',
+    'val.Meen': 'Meen (Pisces)',
     'co.title': 'Correct my biodata',
     'co.lead': 'Made a mistake or want to change your photo? Enter your Profile ID and the parent/guardian mobile number given during registration, describe the change, and attach a new photo or PDF if needed. The committee will check and update your profile.',
     'co.changes': 'What should be corrected?',
@@ -1588,6 +1626,26 @@ window.I18N = {
     'd.years': '{n} वर्षे',
     'd.willing': 'गानली समाजात विवाहास इच्छुक',
     'd.social': 'सोशल प्रोफाइल',
+    'leg.birth': 'जन्म व पत्रिका माहिती',
+    'f.birthTime': 'जन्म वेळ',
+    'f.birthPlace': 'जन्म ठिकाण',
+    'ph.birthPlace': 'उदा. चंद्रपूर',
+    'f.rashi': 'रास',
+    'f.bloodGroup': 'रक्त गट',
+    'u.am': 'म.पू.',
+    'u.pm': 'म.नं.',
+    'val.Mesh': 'मेष',
+    'val.Vrishabh': 'वृषभ',
+    'val.Mithun': 'मिथुन',
+    'val.Kark': 'कर्क',
+    'val.Simha': 'सिंह',
+    'val.Kanya': 'कन्या',
+    'val.Tula': 'तूळ',
+    'val.Vrishchik': 'वृश्चिक',
+    'val.Dhanu': 'धनु',
+    'val.Makar': 'मकर',
+    'val.Kumbh': 'कुंभ',
+    'val.Meen': 'मीन',
     'co.title': 'माझा बायोडाटा दुरुस्त करा',
     'co.lead': 'माहिती चुकली आहे किंवा फोटो बदलायचा आहे? नोंदणीच्या वेळी दिलेला प्रोफाइल आयडी आणि पालकांचा मोबाईल नंबर टाका, काय बदलायचे ते लिहा आणि गरज असल्यास नवीन फोटो किंवा PDF जोडा. समिती तपासून आपले प्रोफाइल अपडेट करेल.',
     'co.changes': 'काय दुरुस्त करायचे आहे?',
@@ -1804,6 +1862,26 @@ window.I18N = {
     'd.years': '{n} वर्ष',
     'd.willing': 'गानली समाज में विवाह के इच्छुक',
     'd.social': 'सोशल प्रोफ़ाइल',
+    'leg.birth': 'जन्म व कुंडली जानकारी',
+    'f.birthTime': 'जन्म समय',
+    'f.birthPlace': 'जन्म स्थान',
+    'ph.birthPlace': 'जैसे चंद्रपुर',
+    'f.rashi': 'राशि',
+    'f.bloodGroup': 'रक्त समूह',
+    'u.am': 'पूर्वाह्न',
+    'u.pm': 'अपराह्न',
+    'val.Mesh': 'मेष',
+    'val.Vrishabh': 'वृषभ',
+    'val.Mithun': 'मिथुन',
+    'val.Kark': 'कर्क',
+    'val.Simha': 'सिंह',
+    'val.Kanya': 'कन्या',
+    'val.Tula': 'तुला',
+    'val.Vrishchik': 'वृश्चिक',
+    'val.Dhanu': 'धनु',
+    'val.Makar': 'मकर',
+    'val.Kumbh': 'कुंभ',
+    'val.Meen': 'मीन',
     'co.title': 'मेरा बायोडाटा सुधारें',
     'co.lead': 'जानकारी गलत हो गई या फोटो बदलनी है? पंजीकरण के समय दी गई प्रोफ़ाइल आईडी और अभिभावक का मोबाइल नंबर डालें, क्या बदलना है लिखें और ज़रूरत हो तो नई फोटो या PDF जोड़ें। समिति जाँच कर आपकी प्रोफ़ाइल अपडेट करेगी।',
     'co.changes': 'क्या सुधारना है?',
@@ -2087,6 +2165,14 @@ window.I18N = {
     return age;
   }
 
+  /** "01:35" → "1:35 AM" (म.पू. / पूर्वाह्न in Marathi / Hindi). */
+  function fmtTime(hhmm) {
+    var m = /^(\d{1,2}):(\d{2})/.exec(hhmm || '');
+    if (!m) return '';
+    var h = +m[1];
+    return (h % 12 || 12) + ':' + m[2] + ' ' + t(h < 12 ? 'u.am' : 'u.pm');
+  }
+
   function fmtDate(iso) {
     if (!iso) return '';
     var d = new Date(iso);
@@ -2143,7 +2229,11 @@ window.I18N = {
     marital: function () {
       return optionsHtml((CFG.maritalStatuses || []).map(function (m) { return [m, tv(m)]; }), t('opt.select'));
     },
-    states: function () { return optionsHtml(CFG.states || [], t('opt.selectState')); }
+    states: function () { return optionsHtml(CFG.states || [], t('opt.selectState')); },
+    rashis: function () {
+      return optionsHtml((CFG.rashis || []).map(function (r) { return [r, tv(r)]; }), t('opt.select'));
+    },
+    bloodGroups: function () { return optionsHtml(CFG.bloodGroups || [], t('opt.select')); }
   };
 
   /** (Re)builds the form dropdowns in the current language, keeping any chosen values. */
@@ -2367,6 +2457,10 @@ window.I18N = {
       instagram: normalizeUrl(form.instagram.value),
       facebook: normalizeUrl(form.facebook.value),
       showSocial: form.showSocial.checked,
+      birthTime: form.birthTime.value,
+      birthPlace: form.birthPlace.value.trim(),
+      rashi: form.rashi.value,
+      bloodGroup: form.bloodGroup.value,
       consent: form.consent.checked,
       website: form.website.value,
       lang: lang
@@ -2664,6 +2758,10 @@ window.I18N = {
       line(t('f.education'), p.education),
       line(t('f.profession'), p.profession),
       line(t('f.cityState'), p.city + ', ' + p.state),
+      line(t('f.birthTime'), fmtTime(p.birthTime)),
+      line(t('f.birthPlace'), p.birthPlace),
+      line(t('f.rashi'), p.rashi ? tv(p.rashi) : ''),
+      line(t('f.bloodGroup'), p.bloodGroup),
       p.intro ? '\n' + t('leg.about') + ':\n' + p.intro : '',
       p.familyDetails ? '\n' + t('leg.family') + ':\n' + p.familyDetails : '',
       '',
@@ -2905,6 +3003,8 @@ window.I18N = {
           (p.community === 'Other' ? row(t('d.willing'), tv(p.willing)) : '') +
           row(t('f.education'), p.education) + row(t('f.profession'), p.profession) +
           row(t('f.city'), p.city) + row(t('f.state'), p.state) +
+          row(t('f.birthTime'), fmtTime(p.birthTime)) + row(t('f.birthPlace'), p.birthPlace) +
+          row(t('f.rashi'), p.rashi ? tv(p.rashi) : '') + row(t('f.bloodGroup'), p.bloodGroup) +
         '</div>' +
         '<div class="detail-section">' + (p.intro ? '<h4>' + esc(t('leg.about')) + '</h4><p>' + esc(p.intro) + '</p>' : '') +
         '<h4>' + esc(t('leg.family')) + '</h4><p>' + esc(p.familyDetails) + '</p>' +
@@ -3330,6 +3430,8 @@ window.I18N = {
           (p.community === 'Other' ? row('Willing to marry in Ganli Samaj', p.willing) : '') +
           row('Education', p.education) + row('Profession', p.profession) +
           row('City', p.city) + row('State', p.state) +
+          row('Birth time', fmtTime(p.birthTime)) + row('Birth place', p.birthPlace) +
+          row('Rashi', p.rashi) + row('Blood group', p.bloodGroup) +
         '</div>' +
         '<div class="detail-section">' + (p.intro ? '<h4>About</h4><p>' + esc(p.intro) + '</p>' : '') +
         '<h4>Family</h4><p>' + esc(p.familyDetails) + '</p>' +
@@ -3363,6 +3465,10 @@ window.I18N = {
     ['linkedin', 'LinkedIn URL', 'url', 200],
     ['instagram', 'Instagram URL', 'url', 200],
     ['facebook', 'Facebook URL', 'url', 200],
+    ['birthTime', 'Birth time (optional)', 'time'],
+    ['birthPlace', 'Birth place (optional)', 'text', 60],
+    ['rashi', 'Rashi (optional)', 'select', 'rashis'],
+    ['bloodGroup', 'Blood group (optional)', 'select', 'bloodGroups'],
     ['showSocial', 'Show social links to members', 'checkbox'],
     ['adminNote', 'Admin note (admins only)', 'textarea', 500]
   ];
@@ -3378,7 +3484,7 @@ window.I18N = {
     }
     var input;
     if (type === 'select') {
-      var opts = Array.isArray(extra) ? extra : extra === 'marital' ? CFG.maritalStatuses : CFG.states;
+      var opts = Array.isArray(extra) ? extra : ({ marital: CFG.maritalStatuses, rashis: CFG.rashis, bloodGroups: CFG.bloodGroups })[extra] || CFG.states;
       input = '<select name="' + name + '">' + optionsHtml(opts || [], 'Select', v) + '</select>';
     } else if (type === 'height') {
       var hs = heights();
