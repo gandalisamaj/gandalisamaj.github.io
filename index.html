@@ -1169,7 +1169,7 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
-  <script>window.API_URL = "https://script.google.com/macros/s/AKfycbzo7bq5ug_5Pg6rLAqjuREA01VkCHjJV5R67lzIRJOOliUAfhKmEbW1gjLtzR6baG-d/exec";</script>
+  <script>window.API_URL = "https://script.google.com/macros/s/AKfycbzo7bq5ug_5Pg6rLAqjuREA01VkCHjJV5R67lzIRJOOliUAfhKmEbW1gjLtzR6baG-d/exec";window.APP_CONFIG_DEFAULT = {"ready":true,"memberAccessRequired":false,"contactInfo":"","states":["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Andaman and Nicobar Islands","Chandigarh","Dadra and Nagar Haveli and Daman and Diu","Delhi","Jammu and Kashmir","Ladakh","Lakshadweep","Puducherry","Outside India"],"maritalStatuses":["Never Married","Divorced","Widowed","Awaiting Divorce"],"minAge":{"Male":21,"Female":18},"maxAge":70};</script>
   <script>
 /* Interface text in English, Marathi and Hindi. Missing keys fall back to English.
    {n}, {id}, {p} … are placeholders filled in by the page. */
@@ -1771,6 +1771,13 @@ window.I18N = {
 
   if (window.APP_CONFIG) {
     app(window.APP_CONFIG);
+  } else if (window.APP_CONFIG_DEFAULT) {
+    // Static site: start instantly with the settings baked in at build time, then
+    // refresh them in the background (contact info / access code may have changed).
+    app(window.APP_CONFIG_DEFAULT);
+    apiCall('getPublicConfig', []).then(function (fresh) {
+      if (window.onConfigRefresh) window.onConfigRefresh(fresh);
+    }, function () { /* keep the built-in settings */ });
   } else {
     apiCall('getPublicConfig', []).then(app, function () { app({ ready: true, offline: true }); });
   }
@@ -2992,6 +2999,14 @@ window.I18N = {
   $$('[data-lang]').forEach(function (b) {
     b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); });
   });
+
+  /** Applies settings fetched after start-up (static site only). */
+  window.onConfigRefresh = function (fresh) {
+    var gateChanged = !!fresh.memberAccessRequired !== !!CFG.memberAccessRequired;
+    Object.assign(CFG, fresh);
+    renderFooterContact();
+    if (gateChanged && !$('#view-home').hidden) { state.searched = false; onEnter.home(); }
+  };
 
   applyI18n();
   fillSelects();
