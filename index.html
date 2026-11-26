@@ -650,6 +650,13 @@
   .contact-sides > div { background: var(--cream); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
   .contact-sides p { margin: 6px 0 0; }
   @media (min-width: 640px) { .contact-sides { grid-template-columns: 1fr 1fr; } }
+  .co-photo { display: flex; align-items: center; gap: 12px; }
+  .co-photo img, .co-new-photo img {
+    width: 96px; height: 120px; object-fit: contain; border-radius: 10px; flex: none;
+    background: #2b1016; border: 2px solid var(--gold);
+  }
+  .co-new-photo { margin: 8px 0; }
+  .co-changes { white-space: pre-line; }
   .share-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
   .share-row .btn { flex: 1 1 180px; }
   .btn-whatsapp { background: linear-gradient(180deg, #2fd16b, #1da851); color: #fff; text-decoration: none; }
@@ -1058,6 +1065,7 @@
         <p class="muted" data-i18n="success.note">Please note this ID. Your profile will appear in the directory after the committee approves it. You need this ID and the registered mobile number to request removal.</p>
         <div class="hero-actions">
           <button class="btn btn-gold" data-nav="home" data-i18n="btn.backHome">Back to Home</button>
+          <button class="btn btn-ghost" data-nav="correction" data-i18n="co.mistake">Made a mistake? Correct it</button>
         </div>
       </div>
     </section>
@@ -1081,6 +1089,40 @@
         <div id="removal-msg" class="alert" role="status" hidden></div>
         <div class="form-actions">
           <button type="submit" class="btn btn-primary" data-i18n="btn.sendRequest">Submit Request</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ============ CORRECTION ============ -->
+    <section id="view-correction" class="view container narrow" hidden>
+      <h2 class="page-title" data-i18n="co.title">Correct my biodata</h2>
+      <p class="page-lead" data-i18n="co.lead">Made a mistake or want to change your photo? Enter your Profile ID and the parent/guardian mobile number given during registration, describe the change, and attach a new photo or PDF if needed. The committee will check and update your profile.</p>
+      <form id="correction-form" class="card" novalidate>
+        <div class="grid-2">
+          <label class="field"><span class="lbl" data-i18n="f.profileId">Profile ID</span> <span class="req">*</span>
+            <input name="profileId" required maxlength="12" placeholder="GS-00012" autocapitalize="characters">
+          </label>
+          <label class="field"><span class="lbl" data-i18n="f.regMobile">Registered Mobile</span> <span class="req">*</span>
+            <input name="mobile" type="tel" inputmode="numeric" required maxlength="16">
+          </label>
+          <label class="field span-2"><span class="lbl" data-i18n="co.changes">What should be corrected?</span> <span class="req">*</span>
+            <textarea name="changes" rows="4" maxlength="1500" placeholder="e.g. Height is 5 ft 6 in, not 5 ft 4 in. Profession: Bank Officer." data-i18n-ph="co.changesPh"></textarea>
+          </label>
+          <div class="field">
+            <span class="field-label"><span data-i18n="co.newPhoto">New photo</span> <span class="optional" data-i18n="optional">(optional)</span></span>
+            <div class="co-photo">
+              <img id="co-photo-preview" alt="" hidden>
+              <input type="file" id="co-photo-input" accept="image/*">
+            </div>
+          </div>
+          <label class="field"><span class="lbl" data-i18n="co.newPdf">New biodata PDF</span> <span class="optional" data-i18n="optional">(optional)</span>
+            <input type="file" id="co-pdf-input" accept="application/pdf">
+          </label>
+        </div>
+        <div class="hp" aria-hidden="true"><input name="website" tabindex="-1" autocomplete="off"></div>
+        <div id="correction-msg" class="alert" role="status" hidden></div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" data-i18n="co.submit">Send correction</button>
         </div>
       </form>
     </section>
@@ -1115,6 +1157,7 @@
           <button role="tab" data-tab="Approved">Approved <span class="count" data-count="Approved">0</span></button>
           <button role="tab" data-tab="Rejected">Rejected <span class="count" data-count="Rejected">0</span></button>
           <button role="tab" data-tab="Contacts">💌 Contact Requests <span class="count" data-count="Contacts">0</span></button>
+          <button role="tab" data-tab="Corrections">✏️ Corrections <span class="count" data-count="Corrections">0</span></button>
           <button role="tab" data-tab="Removal">Removal Requests <span class="count" data-count="Removal">0</span></button>
         </div>
         <form id="admin-search" class="inline-form">
@@ -1132,6 +1175,7 @@
       <button data-nav="home" data-i18n="foot.home">Home</button>
       <button data-nav="submit" data-i18n="btn.submitBiodata">Submit Biodata</button>
       <button data-nav="search" data-i18n="btn.browse">Browse Profiles</button>
+      <button data-nav="correction" data-i18n="foot.correction">Correct my biodata</button>
       <button data-nav="removal" data-i18n="foot.removal">Request Removal</button>
       <button data-nav="admin" data-i18n="foot.admin">Admin</button>
     </div>
@@ -1328,6 +1372,21 @@ window.I18N = {
     'd.years': '{n} years',
     'd.willing': 'Willing to marry in Ganli Samaj',
     'd.social': 'Social profiles',
+    'co.title': 'Correct my biodata',
+    'co.lead': 'Made a mistake or want to change your photo? Enter your Profile ID and the parent/guardian mobile number given during registration, describe the change, and attach a new photo or PDF if needed. The committee will check and update your profile.',
+    'co.changes': 'What should be corrected?',
+    'co.changesPh': 'e.g. Height is 5 ft 6 in, not 5 ft 4 in. Profession: Bank Officer.',
+    'co.newPhoto': 'New photo',
+    'co.newPdf': 'New biodata PDF',
+    'co.submit': 'Send correction',
+    'co.done': 'Thank you! Your correction has been sent. The committee will update your profile soon.',
+    'co.noMatch': 'The Profile ID and mobile number do not match our records. Please check both.',
+    'co.needChange': 'Please describe what needs to be corrected, or attach a new photo / PDF.',
+    'co.mistake': 'Made a mistake? Correct it',
+    'foot.correction': 'Correct my biodata',
+    'wa.toFamily': 'Namaste {guardian}, this is the Ganli Samaj matrimonial committee. A family is interested in profile {id} ({name}): {from}. Shall we share your contact number with them?',
+    'wa.toRequester': 'Namaste {from}, this is the Ganli Samaj matrimonial committee about your interest in profile {id}.',
+    'wa.toCorrection': 'Namaste {guardian}, this is the Ganli Samaj matrimonial committee about your correction request for profile {id}.',
     'd.sharePhoto': '📤 Share with photo',
     'd.preparing': 'Preparing…',
     'd.cardSaved': 'Biodata card with photo downloaded — attach it in WhatsApp.',
@@ -1529,6 +1588,21 @@ window.I18N = {
     'd.years': '{n} वर्षे',
     'd.willing': 'गानली समाजात विवाहास इच्छुक',
     'd.social': 'सोशल प्रोफाइल',
+    'co.title': 'माझा बायोडाटा दुरुस्त करा',
+    'co.lead': 'माहिती चुकली आहे किंवा फोटो बदलायचा आहे? नोंदणीच्या वेळी दिलेला प्रोफाइल आयडी आणि पालकांचा मोबाईल नंबर टाका, काय बदलायचे ते लिहा आणि गरज असल्यास नवीन फोटो किंवा PDF जोडा. समिती तपासून आपले प्रोफाइल अपडेट करेल.',
+    'co.changes': 'काय दुरुस्त करायचे आहे?',
+    'co.changesPh': 'उदा. उंची 5 फूट 6 इंच आहे, 5 फूट 4 इंच नाही. व्यवसाय: बँक अधिकारी.',
+    'co.newPhoto': 'नवीन फोटो',
+    'co.newPdf': 'नवीन बायोडाटा PDF',
+    'co.submit': 'दुरुस्ती पाठवा',
+    'co.done': 'धन्यवाद! आपली दुरुस्ती पाठवली आहे. समिती लवकरच आपले प्रोफाइल अपडेट करेल.',
+    'co.noMatch': 'प्रोफाइल आयडी आणि मोबाईल नंबर आमच्या नोंदीशी जुळत नाहीत. कृपया दोन्ही तपासा.',
+    'co.needChange': 'कृपया काय दुरुस्त करायचे ते लिहा, किंवा नवीन फोटो / PDF जोडा.',
+    'co.mistake': 'माहिती चुकली? दुरुस्त करा',
+    'foot.correction': 'बायोडाटा दुरुस्त करा',
+    'wa.toFamily': 'नमस्कार {guardian}, गानली समाज विवाह समितीकडून बोलत आहोत. प्रोफाइल {id} ({name}) मध्ये एका कुटुंबाला रस आहे: {from}. आपला संपर्क क्रमांक त्यांना द्यावा का?',
+    'wa.toRequester': 'नमस्कार {from}, गानली समाज विवाह समितीकडून — प्रोफाइल {id} बद्दलच्या आपल्या विनंतीसंदर्भात संपर्क करत आहोत.',
+    'wa.toCorrection': 'नमस्कार {guardian}, गानली समाज विवाह समितीकडून — प्रोफाइल {id} च्या दुरुस्ती विनंतीसंदर्भात संपर्क करत आहोत.',
     'd.sharePhoto': '📤 फोटोसह पाठवा',
     'd.preparing': 'तयार करत आहोत…',
     'd.cardSaved': 'फोटोसह बायोडाटा कार्ड डाउनलोड झाले — ते WhatsApp मध्ये जोडा.',
@@ -1730,6 +1804,21 @@ window.I18N = {
     'd.years': '{n} वर्ष',
     'd.willing': 'गानली समाज में विवाह के इच्छुक',
     'd.social': 'सोशल प्रोफ़ाइल',
+    'co.title': 'मेरा बायोडाटा सुधारें',
+    'co.lead': 'जानकारी गलत हो गई या फोटो बदलनी है? पंजीकरण के समय दी गई प्रोफ़ाइल आईडी और अभिभावक का मोबाइल नंबर डालें, क्या बदलना है लिखें और ज़रूरत हो तो नई फोटो या PDF जोड़ें। समिति जाँच कर आपकी प्रोफ़ाइल अपडेट करेगी।',
+    'co.changes': 'क्या सुधारना है?',
+    'co.changesPh': 'जैसे लंबाई 5 फुट 6 इंच है, 5 फुट 4 इंच नहीं। व्यवसाय: बैंक अधिकारी।',
+    'co.newPhoto': 'नई फोटो',
+    'co.newPdf': 'नया बायोडाटा PDF',
+    'co.submit': 'सुधार भेजें',
+    'co.done': 'धन्यवाद! आपका सुधार भेज दिया गया है। समिति जल्द ही आपकी प्रोफ़ाइल अपडेट करेगी।',
+    'co.noMatch': 'प्रोफ़ाइल आईडी और मोबाइल नंबर हमारे रिकॉर्ड से मेल नहीं खाते। कृपया दोनों जाँचें।',
+    'co.needChange': 'कृपया लिखें कि क्या सुधारना है, या नई फोटो / PDF जोड़ें।',
+    'co.mistake': 'गलती हो गई? सुधारें',
+    'foot.correction': 'बायोडाटा सुधारें',
+    'wa.toFamily': 'नमस्ते {guardian}, गानली समाज विवाह समिति की ओर से। प्रोफ़ाइल {id} ({name}) में एक परिवार की रुचि है: {from}। क्या हम आपका संपर्क नंबर उन्हें दे सकते हैं?',
+    'wa.toRequester': 'नमस्ते {from}, गानली समाज विवाह समिति की ओर से — प्रोफ़ाइल {id} के बारे में आपके अनुरोध के संबंध में।',
+    'wa.toCorrection': 'नमस्ते {guardian}, गानली समाज विवाह समिति की ओर से — प्रोफ़ाइल {id} के सुधार अनुरोध के संबंध में।',
     'd.sharePhoto': '📤 फोटो के साथ भेजें',
     'd.preparing': 'तैयार हो रहा है…',
     'd.cardSaved': 'फोटो के साथ बायोडाटा कार्ड डाउनलोड हुआ — इसे WhatsApp में जोड़ें।',
@@ -1925,6 +2014,12 @@ window.I18N = {
     return s;
   }
   /** Translates a stored English value such as "Male" or "Never Married" for display. */
+  /** Like t(), but in a specific language (e.g. the language a family used on the site). */
+  function tl(l, key, vars) {
+    var prev = lang;
+    if (LANGS.indexOf(l) > -1) lang = l;
+    try { return t(key, vars); } finally { lang = prev; }
+  }
   function tv(value) {
     var key = 'val.' + value;
     return (DICT[lang] && DICT[lang][key]) || value;
@@ -2099,7 +2194,7 @@ window.I18N = {
   /* Navigation                                                    */
   /* ------------------------------------------------------------ */
 
-  var VIEWS = ['home', 'submit', 'success', 'removal', 'admin'];
+  var VIEWS = ['home', 'submit', 'success', 'removal', 'correction', 'admin'];
   var onEnter = {};
 
   /** "search" is not a separate page: it is the directory section on the home page. */
@@ -2273,7 +2368,8 @@ window.I18N = {
       facebook: normalizeUrl(form.facebook.value),
       showSocial: form.showSocial.checked,
       consent: form.consent.checked,
-      website: form.website.value
+      website: form.website.value,
+      lang: lang
     };
   }
 
@@ -2645,7 +2741,7 @@ window.I18N = {
     setBusy(btn, true, t('btn.sending'));
     call('requestContact', viewerToken(), {
       profileId: state.currentProfile.id, name: name, mobile: f.mobile.value, fromProfileId: fromId,
-      message: f.message.value, website: f.website.value
+      message: f.message.value, website: f.website.value, lang: lang
     }).then(function () {
       showAlert(msg, t('cr.done', { mobile: normalizeMobile(f.mobile.value) }), 'ok');
       btn.hidden = true;
@@ -2832,6 +2928,59 @@ window.I18N = {
   /* Removal request                                               */
   /* ------------------------------------------------------------ */
 
+  /* ---------- Correction request ---------- */
+
+  state.coPhoto = '';
+  $('#co-photo-input').addEventListener('change', function () {
+    var input = this, f = input.files[0], img = $('#co-photo-preview');
+    state.coPhoto = '';
+    img.hidden = true;
+    if (!f) return;
+    var fail = function (key) { toast(t(key), 'error'); input.value = ''; };
+    if (!(/^image\//.test(f.type) || /\.(jpe?g|png|webp|gif|bmp|heic|heif)$/i.test(f.name || ''))) return fail('t.photoType');
+    if (f.size > 25 * 1024 * 1024) return fail('t.photoBig');
+    resizePhoto(f).then(function (jpeg) {
+      state.coPhoto = jpeg;
+      img.src = 'data:image/jpeg;base64,' + jpeg;
+      img.hidden = false;
+    }, function () { fail('t.photoType'); });
+  });
+  $('#co-pdf-input').addEventListener('change', function () {
+    var f = this.files[0];
+    if (!f) return;
+    if (f.type !== 'application/pdf') { toast(t('t.pdfType'), 'error'); this.value = ''; return; }
+    if (f.size > 5 * 1024 * 1024) { toast(t('t.pdfBig'), 'error'); this.value = ''; }
+  });
+
+  $('#correction-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = this;
+    var msg = $('#correction-msg');
+    var id = f.profileId.value.trim().toUpperCase();
+    var pdfFile = $('#co-pdf-input').files[0];
+    if (!/^GS-\d{5,}$/.test(id)) { showAlert(msg, t('v.profileId')); return; }
+    if (!normalizeMobile(f.mobile.value)) { showAlert(msg, t('v.mobile')); return; }
+    if (f.changes.value.trim().length < 5 && !state.coPhoto && !pdfFile) { showAlert(msg, t('co.needChange')); return; }
+    var btn = f.querySelector('button[type="submit"]');
+    setBusy(btn, true, t('btn.sending'));
+    var payload = { profileId: id, mobile: f.mobile.value, changes: f.changes.value, website: f.website.value, lang: lang };
+    if (state.coPhoto) payload.photo = { mimeType: 'image/jpeg', data: state.coPhoto };
+    (pdfFile ? readAsBase64(pdfFile) : Promise.resolve(''))
+      .then(function (pdf) {
+        if (pdf) payload.pdf = { mimeType: 'application/pdf', data: pdf };
+        return call('requestCorrection', payload);
+      })
+      .then(function () {
+        f.reset();
+        state.coPhoto = '';
+        $('#co-photo-preview').hidden = true;
+        showAlert(msg, t('co.done'), 'ok');
+      }, function (err) {
+        showAlert(msg, hasCode(err, 'NO_MATCH') ? t('co.noMatch') : errText(err));
+      })
+      .then(function () { setBusy(btn, false); });
+  });
+
   $('#removal-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var f = this;
@@ -2925,9 +3074,20 @@ window.I18N = {
 
   function loadAdmin() {
     $$('.tabs [data-tab]').forEach(function (b) { b.classList.toggle('active', b.dataset.tab === state.adminTab); });
-    $('#admin-search').hidden = state.adminTab === 'Removal' || state.adminTab === 'Contacts';
+    $('#admin-search').hidden = ['Removal', 'Contacts', 'Corrections'].indexOf(state.adminTab) > -1;
     var list = $('#admin-list');
     list.innerHTML = '<div class="loading">Loading…</div>';
+
+    if (state.adminTab === 'Corrections') {
+      Promise.all([
+        call('adminListCorrections', state.adminToken),
+        call('adminListProfiles', state.adminToken, { status: 'Pending' })
+      ]).then(function (r) {
+        updateCounts(r[1].counts);
+        renderCorrections(r[0]);
+      }).catch(function (err) { list.innerHTML = ''; adminFail(err); });
+      return;
+    }
 
     if (state.adminTab === 'Contacts') {
       Promise.all([
@@ -3005,10 +3165,12 @@ window.I18N = {
     var badge = { New: 'badge-pending', Connected: 'badge-approved', Declined: 'badge-rejected' };
     list.innerHTML = items.map(function (r) {
       var rid = esc(r.requestId);
-      var toFamily = 'Namaste ' + r.guardianName + ', this is the Ganli Samaj matrimonial committee. A family is interested in profile ' +
-        r.profileId + ' (' + r.profileName + '): ' + r.fromName + (r.fromProfileId ? ' (' + r.fromProfileId + ')' : '') +
-        '. Shall we share your contact number with them?';
-      var toRequester = 'Namaste ' + r.fromName + ', this is the Ganli Samaj matrimonial committee about your request for profile ' + r.profileId + '.';
+      // Each family gets the message in the language they used on the site (else the language selected now).
+      var toFamily = tl(r.profileLang || lang, 'wa.toFamily', {
+        guardian: r.guardianName, id: r.profileId, name: r.profileName,
+        from: r.fromName + (r.fromProfileId ? ' (' + r.fromProfileId + ')' : '')
+      });
+      var toRequester = tl(r.fromLang || lang, 'wa.toRequester', { from: r.fromName, id: r.profileId });
       return '<article class="admin-item contact-item">' +
         '<div class="admin-item-head"><div><h4>For ' + esc(r.profileId) + (r.profileName ? ' — ' + esc(r.profileName) : '') + '</h4>' +
           '<div class="muted small">' + rid + ' · ' + esc(fmtDate(r.requestedAt)) +
@@ -3019,9 +3181,9 @@ window.I18N = {
           '<div><div class="small muted">Interested family</div><strong>' + esc(r.fromName) + '</strong>' +
             (r.fromProfileId ? ' <span class="chip">' + esc(r.fromProfileId) + (r.fromProfileName ? ' · ' + esc(r.fromProfileName) : '') + '</span>' : '') +
             (r.message ? '<p class="small">“' + esc(r.message) + '”</p>' : '') +
-            '<div class="admin-actions">' + phoneLinks(r.fromMobile, toRequester) + '</div></div>' +
+            '<div class="admin-actions">' + phoneLinks(r.fromMobile, toRequester) + langTag(r.fromLang) + '</div></div>' +
           (r.profileExists ? '<div><div class="small muted">Profile family (guardian)</div><strong>' + esc(r.guardianName) + '</strong>' +
-            '<div class="admin-actions">' + phoneLinks(r.guardianMobile, toFamily) + '</div></div>' : '') +
+            '<div class="admin-actions">' + phoneLinks(r.guardianMobile, toFamily) + langTag(r.profileLang) + '</div></div>' : '') +
         '</div>' +
         (r.adminNote ? '<div class="small"><strong>Note:</strong> ' + esc(r.adminNote) + '</div>' : '') +
         '<div class="admin-actions">' +
@@ -3029,6 +3191,43 @@ window.I18N = {
           (r.status !== 'Connected' ? '<button class="btn btn-success btn-sm" data-act="cr-Connected" data-rid="' + rid + '">✓ Mark connected</button>' : '') +
           (r.status !== 'Declined' ? '<button class="btn btn-ghost btn-sm" data-act="cr-Declined" data-rid="' + rid + '">Decline</button>' : '') +
           (r.status !== 'New' ? '<button class="btn btn-ghost btn-sm" data-act="cr-New" data-rid="' + rid + '">Reopen</button>' : '') +
+        '</div></article>';
+    }).join('');
+  }
+
+  var LANG_NAMES = { mr: 'मराठी', hi: 'हिंदी', en: 'English' };
+  function langTag(l) {
+    return l && LANG_NAMES[l] ? '<span class="chip" title="Message language">🌐 ' + LANG_NAMES[l] + '</span>' : '';
+  }
+
+  function renderCorrections(items) {
+    var list = $('#admin-list');
+    if (!items.length) {
+      list.innerHTML = '<div class="empty">No correction requests yet. Families send them from "Correct my biodata" at the bottom of the site.</div>';
+      return;
+    }
+    var badge = { Open: 'badge-pending', Applied: 'badge-approved', Dismissed: 'badge-rejected' };
+    list.innerHTML = items.map(function (r) {
+      var rid = esc(r.requestId), open = r.status === 'Open';
+      var waText = tl(r.lang || lang, 'wa.toCorrection', { guardian: r.guardianName, id: r.profileId });
+      return '<article class="admin-item">' +
+        '<div class="admin-item-head"><div><h4>' + esc(r.profileId) + (r.profileName ? ' — ' + esc(r.profileName) : '') + '</h4>' +
+          '<div class="muted small">' + rid + ' · ' + esc(fmtDate(r.requestedAt)) +
+          (r.handledBy ? ' · ' + esc(r.status) + ' by ' + esc(r.handledBy) : '') + '</div></div>' +
+          '<span class="badge ' + (badge[r.status] || '') + '">' + esc(r.status) + '</span></div>' +
+        (r.profileExists ? '' : '<div class="alert alert-warn small">This profile no longer exists.</div>') +
+        (r.changes ? '<div class="contact-sides"><div><div class="small muted">Requested changes</div><p class="co-changes">' + esc(r.changes) + '</p></div></div>' : '') +
+        (open && r.newPhoto ? '<div class="co-new-photo"><div class="small muted">New photo sent</div><img alt="" src="' + esc(r.newPhoto) + '"></div>' : '') +
+        (open && r.hasNewPhoto && !r.newPhoto ? '<div class="small muted">A new photo was sent.</div>' : '') +
+        (open && r.newPdfUrl ? '<div class="small"><a target="_blank" rel="noopener noreferrer" href="' + esc(r.newPdfUrl) + '">📄 Open new biodata PDF ↗</a></div>' : '') +
+        (r.adminNote ? '<div class="small"><strong>Note:</strong> ' + esc(r.adminNote) + '</div>' : '') +
+        '<div class="admin-actions">' +
+          (r.profileExists ? '<button class="btn btn-primary btn-sm" data-act="edit" data-id="' + esc(r.profileId) + '">✏️ Edit profile</button>' : '') +
+          (open && r.hasNewPhoto && r.profileExists ? '<button class="btn btn-gold btn-sm" data-act="co-photo" data-rid="' + rid + '">Use new photo</button>' : '') +
+          (open && r.hasNewPdf && r.profileExists ? '<button class="btn btn-gold btn-sm" data-act="co-pdf" data-rid="' + rid + '">Use new PDF</button>' : '') +
+          (open ? '<button class="btn btn-success btn-sm" data-act="co-Applied" data-rid="' + rid + '">✓ Done</button>' +
+                  '<button class="btn btn-ghost btn-sm" data-act="co-Dismissed" data-rid="' + rid + '">Dismiss</button>' : '') +
+          (r.profileExists ? phoneLinks(r.guardianMobile, waText) + langTag(r.lang) : '') +
         '</div></article>';
     }).join('');
   }
@@ -3077,6 +3276,17 @@ window.I18N = {
     } else if (act === 'rr-delete') {
       job = confirmBox({ title: 'Delete this profile permanently?', message: 'The profile, photo and PDF will be removed and the request closed.', okText: 'Delete', danger: true })
         .then(function (r) { return r && call('adminResolveRemoval', token, b.dataset.rid, 'delete'); });
+    } else if (act === 'co-photo' || act === 'co-pdf') {
+      var kind = act === 'co-photo' ? 'photo' : 'pdf';
+      job = confirmBox({ title: 'Replace the profile ' + (kind === 'photo' ? 'photo' : 'biodata PDF') + '?',
+          message: 'The current one is moved to the Drive trash and the new one is used.', okText: 'Use new ' + kind })
+        .then(function (r) { return r && call('adminApplyCorrectionFile', token, b.dataset.rid, kind); });
+    } else if (act === 'co-Applied' || act === 'co-Dismissed') {
+      var coStatus = act.slice(3);
+      job = confirmBox({ title: coStatus === 'Applied' ? 'Mark this correction as done?' : 'Dismiss this correction?',
+          message: 'Any new photo/PDF not applied will be moved to the Drive trash.',
+          input: 'Note (optional, admins only)', okText: coStatus === 'Applied' ? 'Done' : 'Dismiss' })
+        .then(function (r) { return r && call('adminResolveCorrection', token, b.dataset.rid, coStatus, r.text); });
     } else if (/^cr-(New|Connected|Declined)$/.test(act)) {
       var status = act.slice(3);
       job = status === 'New'
